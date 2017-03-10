@@ -35,18 +35,29 @@ var create = function(){
 Nakama.player=  Nakama.game.add.sprite(200,200,'assets',"Spaceship1-Player.png");
 
 }
-
+function check() {
+  if(Nakama.player.position.y=10){
+  Nakama.game.add.sprite(0,0,'background');
+  Nakama.game.add.sprite(Nakama.player.position.x,10,'assets',"Spaceship1-Player.png");
+  }
+}
 // update game state each frame
 var update = function(){
 if(Nakama.keyboard.isDown(Phaser.Keyboard.UP)){
+  if(Nakama.player.position.y>=0){
+      check();
   Nakama.player.position.y-=10;
+}
 }else if(Nakama.keyboard.isDown(Phaser.Keyboard.DOWN)){
-  Nakama.player.position.y+=10;
+  if(Nakama.player.position.y<=880){
+  Nakama.player.position.y+=10;}
 }
 if(Nakama.keyboard.isDown(Phaser.Keyboard.LEFT)){
-  Nakama.player.position.x-=10;
+  if(Nakama.player.position.x>=0){
+  Nakama.player.position.x-=10;}
 }else if(Nakama.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-  Nakama.player.position.x+=10;
+  if(Nakama.player.position.x<=580){
+  Nakama.player.position.x+=10;}
 
 }
 }
