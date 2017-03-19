@@ -1,19 +1,18 @@
-class EnemyController {
-  constructor(x,y,spriteName){
-    this.sprite=Nakama.game.add.sprite(x,y,'assets',spriteName);
-    Nakama.game.physics.arcade.enable(this.sprite);
-    //this.sprite.body.collideWorldBounds=true;
+class EnemyController{
+  constructor(x, y, spriteName, configs){
+    this.sprite = Nakama.enemyGroup.create(x, y, 'assets', spriteName);
+    this.sprite.body.collideWorldBounds = true;
+    this.configs = configs;
+    this.sprite.health = this.configs.health;
+    this.sprite.body.velocity.x = this.configs.speed;
   }
 
   update(){
-    if(this.sprite.position.x<=EnemyController.MIN_WIDTH){
-      this.sprite.body.velocity.x=EnemyController.ENEMY_SPEED;
+    if(this.sprite.body.blocked.left){
+      this.sprite.body.velocity.x = this.configs.speed;
     }
-    else if(this.sprite.position.x>=EnemyController.MAX_WIDTH){
-      this.sprite.body.velocity.x=-EnemyController.ENEMY_SPEED;
+    else if(this.sprite.body.blocked.right){
+      this.sprite.body.velocity.x = -this.configs.speed;
     }
   }
 }
-EnemyController.MIN_WIDTH=0;
-EnemyController.MAX_WIDTH=600;
-EnemyController.ENEMY_SPEED=200;
